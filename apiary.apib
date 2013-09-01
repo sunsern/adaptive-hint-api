@@ -1,16 +1,15 @@
 HOST: http://localhost:4132/
 
---- AdaptiveHint Server ---
+--- Hint Server ---
 ---
-Welcome to the our sample API documentation. All comments can be written in (support [Markdown](http://daringfireball.net/projects/markdown/syntax) syntax)
+Hint server generates and manages hints and PG files.
 ---
 
 --
-Student Resources
-The following is a section of resources related to a student
+PG Resources
 --
 List products added into your shopping-cart. (comment block again in Markdown)
-GET /students
+GET /pg{?path}
 < 200
 < Content-Type: application/json
 { "items": [
@@ -18,18 +17,36 @@ GET /students
 ] }
 
 
-Save new products in your shopping cart
-POST /students
-> Content-Type: application/json
-{ "product":"1AB23ORM", "quantity": 2 }
-< 201
+-- Hint Resources --
+Retrieve a hint snippet
+GET /hints/{pg_id}
+< 200
 < Content-Type: application/json
-{ "status": "created", "url": "/shopping-cart/2" }
+{ "items": [
+{ "url": "/students/1", "username":"johndoe", "source_pg":,"testProblems/problem1.pg", "current_html": "<html></html>" }
+] }
 
-
--- Payment Resources --
-This resource allows you to submit payment information to process your *shopping cart* items
-POST /payment
+Submit a new hint snippet
+POST /hints/{pg_id}
 { "cc": "12345678900", "cvc": "123", "expiry": "0112" }
 < 200
 { "receipt": "/payment/receipt/1" }
+
+Delete a hint
+DELETE /hints/{hint_id}
+< 200
+{ "result": "done" }
+
+-- Rendering and Answer checking --
+Render a PG problem into HTML format
+POST /render
+{ "source_pg": "DOCUMENT()..." }
+< 200
+{ "rendered_html": "<div>...</div>" }
+
+Check answers of a PG problem
+POST /checkanswer
+{ "source_pg": "DOCUMENT()...", "answers": [ "AnSwEr0001": "1", "AnSwEr0002": "2"] }
+< 200
+{ "results": [0, 1] }
+
