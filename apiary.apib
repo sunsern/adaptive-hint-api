@@ -1,25 +1,25 @@
-HOST: http://www.google.com/
+HOST: http://localhost:4132/
 
---- Sample API v2 ---
+--- AdaptiveHint Server ---
 ---
 Welcome to the our sample API documentation. All comments can be written in (support [Markdown](http://daringfireball.net/projects/markdown/syntax) syntax)
 ---
 
 --
-Shopping Cart Resources
-The following is a section of resources related to the shopping cart
+Student Resources
+The following is a section of resources related to a student
 --
 List products added into your shopping-cart. (comment block again in Markdown)
-GET /shopping-cart
+GET /students
 < 200
 < Content-Type: application/json
 { "items": [
-{ "url": "/shopping-cart/1", "product":"2ZY48XPZ", "quantity": 1, "name": "New socks", "price": 1.25 }
+{ "url": "/students/1", "username":"johndoe", "source_pg":,"testProblems/problem1.pg", "current_html": "<html></html>" }
 ] }
 
 
 Save new products in your shopping cart
-POST /shopping-cart
+POST /students
 > Content-Type: application/json
 { "product":"1AB23ORM", "quantity": 2 }
 < 201
